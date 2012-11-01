@@ -38,3 +38,6 @@ target/
 
 ## 
 runOnTomcat.sh
+
+
+**/.settings/
