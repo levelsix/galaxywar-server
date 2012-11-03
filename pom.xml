@@ -45,11 +45,19 @@
 		</repository>
 	</repositories>
 	<properties>
-		<jdbc.url><![CDATA[]]>
-		</jdbc.url>
-		<jdbc.username></jdbc.username>
-		<jdbc.password></jdbc.password>
-		<jdbc.driverClassName></jdbc.driverClassName>
+		<jdbc.url><![CDATA[jdbc:mysql://galaxywar.cv5kxrel3z7x.us-east-1.rds.amazonaws.com/galaxywar?useLegacyDatetimeCode=false]]></jdbc.url>
+		<jdbc.username>lvl6admin</jdbc.username>
+		<jdbc.password>robashen123</jdbc.password>
+		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+		<jdbc.idleConnectionTestPeriodInMinutes>1</jdbc.idleConnectionTestPeriodInMinutes>
+		<jdbc.idleMaxAgeInMinutes>5</jdbc.idleMaxAgeInMinutes>
+		<jdbc.maxConnectionsPerPartition>20</jdbc.maxConnectionsPerPartition>
+		<jdbc.minConnectionsPerPartition>1</jdbc.minConnectionsPerPartition>
+		<jdbc.partitionCount>3</jdbc.partitionCount>
+		<jdbc.acquireIncrement>2</jdbc.acquireIncrement>
+		<jdbc.statementsCacheSize>500</jdbc.statementsCacheSize>
+		<jdbc.releaseHelperThreads>3</jdbc.releaseHelperThreads>
+
 		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
 		<wicket.mode>development</wicket.mode>
 		<spring.version>3.1.2.RELEASE</spring.version>
@@ -190,6 +198,12 @@
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-config</artifactId>
 				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.security</groupId>
