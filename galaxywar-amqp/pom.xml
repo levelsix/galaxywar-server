@@ -50,22 +50,7 @@
 	</build>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.lvl6</groupId>
-			<artifactId>galaxywar-data-model</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.lvl6</groupId>
-			<artifactId>galaxywar-persistence</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.lvl6</groupId>
-			<artifactId>galaxywar-amqp</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.lvl6</groupId>
-			<artifactId>galaxywar-protocol-buffers</artifactId>
-		</dependency>
+
 	</dependencies>
 
 </project>

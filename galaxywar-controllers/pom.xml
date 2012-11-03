@@ -56,10 +56,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.lvl6</groupId>
-			<artifactId>galaxywar-persistence</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.lvl6</groupId>
 			<artifactId>galaxywar-amqp</artifactId>
 		</dependency>
 		<dependency>
