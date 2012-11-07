@@ -50,7 +50,10 @@
 	</build>
 
 	<dependencies>
-
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-amqp</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

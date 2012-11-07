@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -25,6 +26,10 @@ public class User {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Column(name = "uuid", unique = true)
 	private String id;
+	
+	
+	@Version
+	private Integer version;
 	
 	
 	@NotNull
@@ -68,6 +73,16 @@ public class User {
 
 	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
+	}
+
+
+	public Integer getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 	
 	
