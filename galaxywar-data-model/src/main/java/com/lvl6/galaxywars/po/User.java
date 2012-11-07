@@ -18,19 +18,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table( name = "users" )
-public class User {
-	
-	
-	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	@Column(name = "uuid", unique = true)
-	private String id;
-	
-	
-	@Version
-	private Integer version;
-	
+public class User extends BasePersistentObject {
+
 	
 	@NotNull
 	protected String name = "";
@@ -75,15 +64,6 @@ public class User {
 		this.lastLogin = lastLogin;
 	}
 
-
-	public Integer getVersion() {
-		return version;
-	}
-
-
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 	
 	
 	
