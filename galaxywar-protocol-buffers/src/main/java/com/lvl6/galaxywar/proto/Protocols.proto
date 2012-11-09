@@ -1,0 +1,14 @@
+import "Event.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "ProtocolsProto";
+
+enum EventProtocolRequest {
+	
+}
+
+enum EventProtocolResponse {
+	
+	
+}
