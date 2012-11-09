@@ -1,6 +1,7 @@
 package com.lvl6.galaxywar.eventhandlers;
 
-import java.util.Map;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lvl6.galaxywar.controller.ControllerMap;
 import com.lvl6.galaxywar.controller.EventController;
-import com.lvl6.galaxywar.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.galaxywar.events.RequestEvent;
+import com.lvl6.galaxywar.utils.Attachment;
 
 public class GameEventHandler implements MessageListener{
 
@@ -24,17 +26,32 @@ public class GameEventHandler implements MessageListener{
 	@Override
 	public void onMessage(Message msg) {
 		log.info("Received message");
-		if(msg != null && msg.getMessageProperties() != null && msg.getMessageProperties().getHeaders() != null) {
-			Map<String, Object> headers = msg.getMessageProperties().getHeaders();
-			EventProtocolRequest eventType = EventProtocolRequest.valueOf((Integer) headers.get(""));
-			EventController controller = controllerMap.getEventControllerByEventType(eventType);
-			controller.processEvent(null);
+		if(msg != null) {
+			Attachment attachment = new Attachment();
+			byte[] payload = (byte[]) msg.getBody();
+			attachment.readBuff = ByteBuffer.wrap(payload);
+			while (attachment.eventReady()) {
+				processAttachment(attachment);
+				attachment.reset();
+			}
 		}else {
 			throw new RuntimeException("Message was null or missing headers");
 		}
 	}
 
 	
+	protected void processAttachment(Attachment attachment) {
+		ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOf(attachment.payload, attachment.payloadSize));
+		EventController ec = controllerMap.getEventControllerByEventType(attachment.eventType);
+		if (ec == null) {
+			return;
+		}
+		RequestEvent  event = ec.createRequestEvent();
+		event.setTag(attachment.tag);
+		event.read(bb);
+		log.debug("Recieved event from client: " + event.getPlayerId());
+		ec.processEvent(event);
+	}
 	
 	public ControllerMap getControllerMap() {
 		return controllerMap;

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.galaxywar.events.GameEvent;
 import com.lvl6.galaxywar.events.RequestEvent;
 import com.lvl6.galaxywar.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.galaxywar.utils.MiscMethods;
@@ -20,15 +19,14 @@ public abstract class EventController{
 	
 	public abstract RequestEvent createRequestEvent();
 
-	public void processEvent(GameEvent event){
-		final RequestEvent reqEvent = (RequestEvent) event;
+	public void processEvent(RequestEvent event){
 		/*MiscMethods.setMDCProperties(	null, reqEvent.getPlayerId(), MiscMethods.getIPOfPlayer(server, reqEvent.getPlayerId(),	null));*/
 		try {
-			processRequestEvent(reqEvent);
+			log.info("Received event: " + event.toString());
+			processRequestEvent(event);
 		}catch(Throwable t) {
 			log.error("Error processing GameEvent", t);
 		}
-		log.info("Received event: " + event.toString());
 		MiscMethods.purgeMDCProperties();
 	}
 
