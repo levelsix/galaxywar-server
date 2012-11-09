@@ -44,12 +44,13 @@ public class GameEventHandler implements MessageListener{
 		ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOf(attachment.payload, attachment.payloadSize));
 		EventController ec = controllerMap.getEventControllerByEventType(attachment.eventType);
 		if (ec == null) {
+			log.error("No event controller found in controllerMap for {}", attachment.eventType);
 			return;
 		}
 		RequestEvent  event = ec.createRequestEvent();
 		event.setTag(attachment.tag);
 		event.read(bb);
-		log.debug("Recieved event from client: " + event.getPlayerId());
+		log.debug("Received event from client: " + event.getPlayerId());
 		ec.processEvent(event);
 	}
 	
